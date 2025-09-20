@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.profiles.server;
 in
@@ -27,13 +27,37 @@ in
       };
     };
 
+    # Don't install the '/lib/ld-linux.so.2 stub'; saves one instance of nixpkgs.
+    environment.ldso32 = null;
+    environment.systemPackages = with pkgs; [
+      ghostty.terminfo
+    ];
+
+    # Use 'dbus-broker' impl; it's better than the default.
+    #
+    # Can be removed once 'dbus-broker' is the default impl.
+    # cf. https://github.com/NixOS/nixpkgs/issues/299476
+    services.dbus.implementation = "broker";
+
+    # All these systems have at least one SSD.
+    services.fstrim.enable = lib.mkDefault true;
+
+    # Use Rust-based system switcher.
+    system.switch = {
+      enable = lib.mkDefault false;
+      enableNg = lib.mkDefault true;
+    };
+
+    # By default we want all NixOS hosts to manage users declaratively.
+    users.mutableUsers = lib.mkDefault false;
+
     networking = {
       firewall.enable = lib.mkDefault true;
       nftables.enable = lib.mkDefault true;
     };
 
     services = {
-      fail2ban.enable = lib.mkDefault true;
+      fail2ban.enable = lib.mkDefault false;
       openssh.enable = lib.mkDefault true;
       smartd.enable = lib.mkDefault true;
     };

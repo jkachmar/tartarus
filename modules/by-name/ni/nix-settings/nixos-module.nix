@@ -1,5 +1,5 @@
 {
-  nix = {
+  nix.settings = {
     experimental-features = [ "cgroups" ];
     allowed-users = [ "@wheel" ];
     trusted-users = [ "@wheel" ];

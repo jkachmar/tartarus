@@ -15,7 +15,7 @@
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = { inherit inputs self unstable; };
-      modules = [
+      modules = self.internal.modules.nixos ++ [
         { nixpkgs.hostPlatform = system; }
         ./configuration.nix
       ];

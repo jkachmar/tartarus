@@ -1,7 +1,8 @@
-{ config, lib, ... }:
+{ config, inputs, lib, self, ... }:
 
 {
   imports = [
+    inputs.disko.nixosModules.default
     # my personal user declaration & associated home-manager config.
     self.nixosModules.jkachmar
     # machine-specific config details.
@@ -9,6 +10,10 @@
     ./disks/hrodreptus.nix
     ./disks/titan.nix
   ];
+
+  profiles = {
+    server.enable = true;
+  };
 
   system.stateVersion = "25.05";
   networking.hostName = "chronos";
