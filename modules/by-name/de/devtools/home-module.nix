@@ -19,6 +19,10 @@ in
 {
   options.profiles.devtools.enable = lib.mkEnableOption "common developer tools";
 
+  # FIXME: Stub for 'programs.vivid' so catppuccin continues to work; should be
+  # resolved when we update to 'home-manager-25.11'.
+  options.programs.vivid.activeTheme = lib.mkOption { };
+
   imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
   config = lib.mkIf cfg.enable {
