@@ -1,7 +1,10 @@
 final: prev:
 let
-  lixOverride = { nix = final.lixPackageSets.latest.lix; };
-in {
+  lixOverride = {
+    nix = final.lixPackageSets.latest.lix;
+  };
+in
+{
   colmena = prev.colmena.override lixOverride;
   nix-direnv = prev.nix-direnv.override lixOverride;
   nix-eval-jobs = prev.lixPackageSets.latest.nix-eval-jobs;

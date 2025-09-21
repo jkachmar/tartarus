@@ -1,7 +1,8 @@
-{config, ...}:
+{ config, ... }:
 let
   username = "jkachmar";
-in {
+in
+{
   imports = [ ./configuration.nix ];
 
   security.ssh-agent.enable = true;
