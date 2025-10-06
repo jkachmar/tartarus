@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   self,
   ...
 }:
@@ -11,10 +12,12 @@
     inputs.disko.nixosModules.default
     # my personal user declaration & associated home-manager config.
     self.nixosModules.jkachmar
-    # machine-specific config details.
+    # machine-specific system config.
     ./networking.nix
     ./disks/hrodreptus.nix
     ./disks/titan.nix
+    # service config for stuff that lives on this machine.
+    ./plex.nix
   ];
 
   profiles = {
@@ -24,7 +27,6 @@
   system.stateVersion = "25.05";
   networking.hostName = "chronos";
 
-  # FIXME: Find a better place to refactor this out to.
   services.smartd.devices = [
     {
       # NOTE: `DEVICESCAN` finds `/dev/nvme0`, so we should use this (rather
@@ -40,29 +42,6 @@
       );
     }
   ];
-
-  # TODO: Move this out to a separate media module or something.
-  users.groups.media.gid = 1010;
-
-  services.plex.enable = true;
-  users.users.plex.extraGroups = [ "media" ];
-  # FIXME: reverse proxy these behind nginx & close the ports off.
-  networking.firewall = {
-    allowedTCPPorts = [
-      32400
-      3005
-      8324
-      32469
-    ];
-    allowedUDPPorts = [
-      1900
-      5353
-      32410
-      32412
-      32413
-      32414
-    ];
-  };
 
   # Hardware survey results.
   boot = {

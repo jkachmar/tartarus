@@ -3,14 +3,13 @@ keys:
   - &jkachmar "0107655CC20AFD1A8F3F9872C1782440640BC696"
   - &chronos "age1v5unwn54mcxm2yd540wvdkqrm84a62yrj3tkq294whygpjl2gu6st83exg"
 creation_rules:
-  - path_regex: secrets/infra/[^/]+\.yaml$
+  - path_regex: (hosts/chronos|overlays/plex-plexpass)/secrets.yaml$
     key_groups:
       - pgp:
           - *jkachmar
         age:
           - *chronos
-  # Services.
-  - path_regex: secrets/services/[^/]+\.yaml$
+  - path_regex: hosts/.*/secrets.yaml$
     key_groups:
       - pgp:
           - *jkachmar
