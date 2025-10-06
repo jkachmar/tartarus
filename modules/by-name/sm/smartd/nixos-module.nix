@@ -28,13 +28,27 @@ in
       ++ [
         # Drive temperature -- track,log,alert
         #
-        # That is: track changes in 2 C increments, log when temperatures exceed
-        # 40 C, alert when temperatures exceed 45 C.
-        "-W"
-        "2,40,45"
+        # That is: don't track incremental temperature changes, log when
+        # temperatures exceed 40 C, alert when temperatures exceed 45 C.
+        "-W 0,40,45"
       ]
     );
     defaults.shared = [
+      # Enables the following directives:
+      #   -H -- check health status of the disk
+      #   -f -- check for 'failure' of any Usage Attributes
+      #   -t -- report when Prefail or Usage Attributes change between tests
+      #   -l error -- report when errors increase over time
+      #   -l selftest -- report when Self-Test failures increase over time
+      #   -l selfteststs -- report if Self-Test status changes between tests
+      #
+      # cf. https://man.archlinux.org/man/smartd.conf.5.en#a
+      "-a"
+      # Enables or disables SMART Automatic Offline Testing when smartd starts up;
+      # valid arguments to this Directive are 'on' and 'off'.
+      "-o on"
+      # Ensure device vendor-specific attribute autosave is enabled.
+      "-S on"
       # Run tests at scheduled times according to the pattern: T/MM/DD/d/HH
       #
       # T  -- test type: S = short, O = offline, L = extended, c = selective*
@@ -53,21 +67,7 @@ in
       # TODO: Look into selective tests, which can be run on a range of LBAs
       # and then "continued" via `smartd`. For example, a 16 TB extended test
       # could be run over several days in 4 TB increments.
-      "-s"
-      "(S/../../../00|L/../15/../02)"
-      #   -H -- check health status of the disk
-      #   -f -- check for 'failure' of any Usage Attributes
-      #   -t -- report when Prefail or Usage Attributes change between tests
-      #   -l error -- report when errors increase over time
-      #   -l selftest -- report when Self-Test failures increase over time
-      #   -l selfteststs -- report if Self-Test status changes between tests
-      #
-      # cf. https://man.archlinux.org/man/smartd.conf.5.en#a
-      "-a"
-      "-o"
-      "on" # enable automatic "offline test" (scan drive every 4 hours for defects)
-      "-S"
-      "on" # ensure device vendor-specific attribute autosave is enabled
+      "-s (S/../.././00|L/../15/./02)"
     ];
   };
 }
