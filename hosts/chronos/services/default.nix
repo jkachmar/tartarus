@@ -1,5 +1,6 @@
 {
-  import = [
+  imports = [
+    ./ddclient.nix
     ./plex.nix
   ];
 }
