@@ -14,10 +14,9 @@
     self.nixosModules.jkachmar
     # machine-specific system config.
     ./networking.nix
-    ./disks/hrodreptus.nix
-    ./disks/titan.nix
+    ./disks
     # service config for stuff that lives on this machine.
-    ./plex.nix
+    ./services
   ];
 
   profiles = {
