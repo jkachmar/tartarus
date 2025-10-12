@@ -19,7 +19,10 @@
     ./services
   ];
 
-  profiles.server.enable = true;
+  profiles.server = {
+    enable = true;
+    nginx.enable = true;
+  };
 
   # Secrets that are shared between a few services ('ddclient' & 'acme') &
   # should be defined once.
@@ -29,9 +32,14 @@
     "porkbun/domains" = { };
   };
 
-  security.acme.defaults.credentialFiles = {
-    "PORKBUN_API_KEY" = config.sops.secrets."porkbun/apikey".path;
-    "PORKBUN_SECRET_API_KEY" = config.sops.secrets."porkbun/secretapikey".path;
+  security.acme = {
+    defaults.credentialFiles = {
+      PORKBUN_API_KEY_FILE = config.sops.secrets."porkbun/apikey".path;
+      PORKBUN_SECRET_API_KEY_FILE = config.sops.secrets."porkbun/secretapikey".path;
+    };
+    certs."chronos.thempire.dev" = {
+      extraDomainNames = [ "*.chronos.thempire.dev" ];
+    };
   };
 
   system.stateVersion = "25.05";
