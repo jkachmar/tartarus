@@ -5,10 +5,6 @@ let
   placeholder = config.sops.placeholder;
 in
 {
-  sops.secrets."porkbun/apikey" = { };
-  sops.secrets."porkbun/secretapikey" = { };
-  sops.secrets."porkbun/domains" = { };
-
   sops.templates."ddclient.conf".content = ''
     cache=/var/lib/ddclient/ddclient.cache
     foreground=YES
@@ -31,6 +27,7 @@ in
     configFile = "/run/credentials/ddclient.service/ddclient.conf";
   };
   # XXX: Workaround systemd 'DynamicUser' & sops credentials.
-  systemd.services.ddclient.serviceConfig.LoadCredential =
-    "ddclient.conf:${config.sops.templates."ddclient.conf".path}";
+  systemd.services.ddclient.serviceConfig.LoadCredential = "ddclient.conf:${
+    config.sops.templates."ddclient.conf".path
+  }";
 }

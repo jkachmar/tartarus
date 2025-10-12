@@ -19,8 +19,19 @@
     ./services
   ];
 
-  profiles = {
-    server.enable = true;
+  profiles.server.enable = true;
+
+  # Secrets that are shared between a few services ('ddclient' & 'acme') &
+  # should be defined once.
+  sops.secrets = {
+    "porkbun/apikey" = { };
+    "porkbun/secretapikey" = { };
+    "porkbun/domains" = { };
+  };
+
+  security.acme.defaults.credentialFiles = {
+    "PORKBUN_API_KEY" = config.sops.secrets."porkbun/apikey".path;
+    "PORKBUN_SECRET_API_KEY" = config.sops.secrets."porkbun/secretapikey".path;
   };
 
   system.stateVersion = "25.05";
