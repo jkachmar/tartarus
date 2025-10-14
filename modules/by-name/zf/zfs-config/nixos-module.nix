@@ -27,5 +27,17 @@
         monthly = lib.mkDefault 2;
       };
     };
+
+    # Enable the ZFS exporter if Victoriametrics is running.
+    services.prometheus.exporters.zfs.enable = lib.mkDefault config.services.victoriametrics.enable;
+    services.victoriametrics.prometheusConfig.scrape_configs = [
+      {
+        job_name = "zfs";
+        scrape_interval = "1m";
+        static_configs = [
+          { targets = [ "localhost:${builtins.toString config.services.prometheus.exporters.zfs.port}" ]; }
+        ];
+      }
+    ];
   };
 }
