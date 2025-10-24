@@ -24,6 +24,9 @@
     nginx.enable = true;
   };
 
+  # FIXME: Set up GPG agent forwarding.
+  home-manager.users.jkachmar.profiles.vcs.signing = false;
+
   # Secrets that are shared between a few services ('ddclient' & 'acme') &
   # should be defined once.
   sops.secrets = {
