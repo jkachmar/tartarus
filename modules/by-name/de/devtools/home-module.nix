@@ -19,8 +19,15 @@ in
 {
   options.profiles.devtools.enable = lib.mkEnableOption "common developer tools";
 
-  # FIXME: Stub for 'programs.vivid' so catppuccin continues to work; should be
-  # resolved when we update to 'home-manager-25.11'.
+  # FIXME: Stub for 'programs.vivid' & 'programs.delta' so catppuccin continues
+  # to work; should be resolved when i update to 'home-manager-25.11'.
+  #
+  # NOTE: this is a great example of how maybe putting everything into Nix
+  # isn't the best idea.
+  #
+  # cf. https://jade.fyi/blog/use-nix-less/
+  options.programs.delta.enable = lib.mkOption { default = false; };
+  options.programs.delta.options = lib.mkOption { };
   options.programs.vivid.activeTheme = lib.mkOption { };
 
   imports = [ inputs.catppuccin.homeModules.catppuccin ];
