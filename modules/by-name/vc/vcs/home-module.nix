@@ -56,7 +56,15 @@ in
       home.packages = [ pkgs.watchman ];
       programs.jujutsu = {
         enable = true;
-        package = unstable.jujutsu;
+        # XXX: cargo-nextest fails to build on macOS, skip tests until the issue
+        # is resolved.
+        #
+        # cf. https://github.com/NixOS/nixpkgs/issues/456113
+        package =
+          if pkgs.stdenv.hostPlatform.isDarwin then
+            unstable.jujutsu.override { rustPlatform = unstable.rustPlatform // { buildRustPackage = unstable.rustPlatform.buildRustPackage.override { cargoNextestHook = null; }; }; }
+          else
+            unstable.jujutsu;
         settings = {
           user.name = cfg.name;
           user.email = cfg.email;
