@@ -4,14 +4,11 @@ let
 in
 {
 
+  users.users.plex.extraGroups = [ "media" ];
   services.plex = {
     enable = true;
     package = pkgs.plex-plexpass;
   };
-
-  # TODO: Move this out to a separate media module or something.
-  users.groups.media.gid = 1010;
-  users.users.plex.extraGroups = [ "media" ];
 
   services.nginx.virtualHosts."plex.${domain}" = {
     useACMEHost = domain;

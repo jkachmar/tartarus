@@ -7,10 +7,16 @@ in
 
   security.ssh-agent.enable = true;
 
+  # FIXME: I should make a system-level admin user for this stuff & then have
+  # my personal user managed by 'kanidm' or something.
   users.users.${username} = {
     name = username;
     uid = 1000;
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      "downloads"
+      "media"
+      "wheel"
+    ];
     isNormalUser = true;
     hashedPassword = "$y$j9T$tKbi4gllRzzbgh2p1Wd6N/$Pc0Ae3q81nXmKV3GsFIIbC345Rmf4KZTDjrsw982Lj3";
     openssh.authorizedKeys.keys = [

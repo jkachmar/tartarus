@@ -12,7 +12,7 @@ in
 
   config = lib.mkIf cfg.enable {
     # Declaratively manage users with 'userborn'.
-    # 
+    #
     # XXX: Keep an eye on this, there's a NixOS issue that says it causes
     # problems during 'nixos-install'.
     services.userborn.enable = lib.mkDefault true;

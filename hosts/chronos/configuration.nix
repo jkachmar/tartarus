@@ -30,7 +30,7 @@
   #
   # Break the recursion by factoring this out to its own set of options.
   services.sabnzbd.enable = true;
-  
+
   # FIXME: Set up GPG agent forwarding.
   home-manager.users.jkachmar.profiles.vcs.signing = false;
 

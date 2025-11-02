@@ -42,6 +42,6 @@ in
       ]
       (secret: {
         # TIL 'ddclient' supports SIGHUP
-        reloadUnits = [ "ddclient.service" ];
+        reloadUnits = [ config.systemd.services.ddclient.name ];
       });
 }

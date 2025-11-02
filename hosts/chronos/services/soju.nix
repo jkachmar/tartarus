@@ -6,7 +6,7 @@ let
   certDir = config.security.acme.certs.${domain}.directory;
 in
 {
-  security.acme.certs.${domain}.reloadServices = [ "soju.service" ];
+  security.acme.certs.${domain}.reloadServices = [ config.systemd.services.soju.name ];
   networking.firewall.allowedTCPPorts = [ port ];
   services.soju = {
     enable = true;
