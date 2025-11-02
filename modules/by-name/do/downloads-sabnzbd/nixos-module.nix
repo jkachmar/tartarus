@@ -10,8 +10,10 @@ let
   vmCfg = config.services.victoriametrics;
 in
 lib.mkIf cfg.enable {
-  users.users.sabnzbd.extraGroups = [ "downloads" ];
-  services.sabnzbd.package = unstable.sabnzbd;
+  services.sabnzbd = {
+    package = unstable.sabnzbd;
+    group = "downloads";
+  };
 
   systemd.services.sabnzbd.serviceConfig = lib.mkIf cfg.enable {
     NoNewPrivileges = true;

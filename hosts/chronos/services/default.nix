@@ -1,8 +1,8 @@
 {
   imports = [
     ./ddclient.nix
+    ./downloads.nix
     ./plex.nix
-    ./sabnzbd.nix
     ./soju.nix
     ./victoriametrics.nix
   ];

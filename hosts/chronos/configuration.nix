@@ -24,13 +24,6 @@
     nginx.enable = true;
   };
 
-  # FIXME: This causes infinite recursion if set in the 'services/sabnzbd.nix'
-  # module (because the prometheus config is dependent on the service being
-  # enabled).
-  #
-  # Break the recursion by factoring this out to its own set of options.
-  services.sabnzbd.enable = true;
-
   # FIXME: Set up GPG agent forwarding.
   home-manager.users.jkachmar.profiles.vcs.signing = false;
 
