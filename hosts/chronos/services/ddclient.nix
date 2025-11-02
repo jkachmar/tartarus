@@ -21,13 +21,27 @@ in
     secretapikey=${placeholder."porkbun/secretapikey"}
     ${placeholder."porkbun/domains"}
   '';
+
   services.ddclient = {
     enable = true;
     interval = "3h";
     configFile = "/run/credentials/ddclient.service/ddclient.conf";
   };
+
   # XXX: Workaround systemd 'DynamicUser' & sops credentials.
   systemd.services.ddclient.serviceConfig.LoadCredential = "ddclient.conf:${
     config.sops.templates."ddclient.conf".path
   }";
+
+  sops.secrets =
+    lib.genAttrs
+      [
+        "porkbun/apikey"
+        "porkbun/secretapikey"
+        "porkbun/domains"
+      ]
+      (secret: {
+        # TIL 'ddclient' supports SIGHUP
+        reloadUnits = [ "ddclient.service" ];
+      });
 }
