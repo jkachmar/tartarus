@@ -1,5 +1,8 @@
 { config, lib, ... }:
-
+let
+  promCfg = config.services.prometheus.exporters.zfs;
+  vmCfg = config.services.victoriametrics;
+in
 {
   config = lib.mkIf config.boot.zfs.enabled {
     # Use the same default hostID as the NixOS install ISO; this allows us
@@ -29,13 +32,13 @@
     };
 
     # Enable the ZFS exporter if Victoriametrics is running.
-    services.prometheus.exporters.zfs.enable = lib.mkDefault config.services.victoriametrics.enable;
+    services.prometheus.exporters.zfs.enable = lib.mkDefault vmCfg.enable;
     services.victoriametrics.prometheusConfig.scrape_configs = [
       {
         job_name = "zfs";
         scrape_interval = "1m";
         static_configs = [
-          { targets = [ "localhost:${builtins.toString config.services.prometheus.exporters.zfs.port}" ]; }
+          { targets = [ "localhost:${builtins.toString promCfg.port}" ]; }
         ];
       }
     ];
