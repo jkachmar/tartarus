@@ -31,8 +31,12 @@ in
       config.systemd.services.radarr.name
       config.systemd.services.sonarr.name
     ];
-    "radarr/apikey".restartUnits = [ config.systemd.services.prometheus-exportarr-radarr-exporter.name ];
-    "sonarr/apikey".restartUnits = [ config.systemd.services.prometheus-exportarr-sonarr-exporter.name ];
+    "radarr/apikey".restartUnits = [
+      config.systemd.services.prometheus-exportarr-radarr-exporter.name
+    ];
+    "sonarr/apikey".restartUnits = [
+      config.systemd.services.prometheus-exportarr-sonarr-exporter.name
+    ];
   };
 
   services.prometheus.exporters = {
