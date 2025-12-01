@@ -53,12 +53,6 @@ in
     # All these systems have at least one SSD.
     services.fstrim.enable = lib.mkDefault true;
 
-    # Use Rust-based system switcher.
-    system.switch = {
-      enable = lib.mkDefault false;
-      enableNg = lib.mkDefault true;
-    };
-
     # By default we want all NixOS hosts to manage users declaratively.
     users.mutableUsers = lib.mkDefault false;
 

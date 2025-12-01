@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (pkgs.hostPlatform) isDarwin;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
   gpgPkg = config.programs.gpg.package;
   cfg = config.programs.gpg;
 in

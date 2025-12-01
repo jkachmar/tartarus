@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (pkgs.targetPlatform) isDarwin;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin;
   cfg = config.profiles.ssh;
 in
 {
@@ -17,22 +17,13 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       programs.ssh.enable = true;
+      programs.ssh.enableDefaultConfig = false;
     })
     (lib.mkIf cfg.yubikey {
-      programs.ssh.extraConfig = ''
-        IdentityFile=~/.ssh/yubikey.pub
-      '';
+      programs.ssh.matchBlocks."*".identityFile = "~/.ssh/yubikey.pub";
     })
     (lib.mkIf (cfg.enable && isDarwin) {
-      programs.ssh = {
-        extraConfig = ''
-          AddKeysToAgent yes
-          UseKeychain yes
-        '';
-        extraOptionOverrides = {
-          IgnoreUnknown = "AddKeysToAgent,UseKeychain";
-        };
-      };
+      programs.ssh.matchBlocks."*".addKeysToAgent = "yes";
     })
   ];
 }

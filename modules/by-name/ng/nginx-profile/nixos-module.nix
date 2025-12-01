@@ -26,7 +26,6 @@ in
   config = lib.mkIf cfg.enable {
     services.nginx = {
       enable = true;
-      package = pkgs.nginxQuic;
       enableReload = lib.mkDefault true;
       enableQuicBPF = lib.mkDefault true;
       recommendedBrotliSettings = true;

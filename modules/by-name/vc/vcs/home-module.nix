@@ -37,10 +37,9 @@ in
       programs.git = {
         enable = true;
 
-        userName = cfg.name;
-        userEmail = cfg.email;
-
-        extraConfig = {
+        settings = {
+          user.name = cfg.name;
+          user.email = cfg.email;
           init.defaultBranch = "main";
           pull.rebase = true;
           push.default = "simple";
