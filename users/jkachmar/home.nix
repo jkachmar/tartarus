@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   fonts.installDefaultFonts = lib.mkDefault true;
   programs.gpg.enable = lib.mkDefault true;
