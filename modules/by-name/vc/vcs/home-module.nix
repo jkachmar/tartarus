@@ -64,10 +64,7 @@ in
           user.name = cfg.name;
           user.email = cfg.email;
 
-          git = {
-            push-new-bookmarks = true;
-            write-change-id-header = true;
-          };
+          git.write-change-id-header = true;
 
           # FIXME: Weird performance regression with `watchman`.
           # cf. https://github.com/jj-vcs/jj/issues/5826
@@ -80,20 +77,6 @@ in
           ui = {
             pager = "less \-FRX";
             show-cryptographic-signatures = true;
-          };
-
-          # Cribbed the following from Jonathan.
-          revsets = {
-            log = "@ | bases | working_lineage | base_branches | base_heads | base_roots";
-          };
-
-          revset-aliases = {
-            bases = "present(bookmarks(base)) | trunk()";
-            working_lineage = "bases::@ | @::";
-            base_branches = "bases:: & bookmarks() & mine()";
-            base_heads = "heads(bases::) & mine()";
-            base_roots = "roots(bases:: ~ bases) & mine()";
-            "base_to_branch(target)" = "bases::bookmarks(target) ~ bases";
           };
 
           aliases = {
@@ -112,35 +95,18 @@ in
               "-l"
               "10"
             ];
+
             s = [ "status" ];
-            n = [
-              "new"
-              "-r"
-              "base"
-            ];
+
             f = [
               "git"
               "fetch"
             ];
+
             back = [
               "edit"
               "-r"
               "@-"
-            ];
-
-            # Cleanup: has a long name because it is desctructive. Abandon
-            # all empty descendents of 'bases'
-            cleanup = [
-              "abandon"
-              "bases:: ~ bases & empty()"
-            ];
-
-            rb = [
-              "rebase"
-              "-s"
-              "base"
-              "-d"
-              "trunk()"
             ];
 
             # Log Mine: Non-graph view of the head of the 10 most recent changesets
