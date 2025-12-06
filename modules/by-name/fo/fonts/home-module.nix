@@ -26,6 +26,7 @@ in
       nerd-fonts.hack
       nerd-fonts.jetbrains-mono
       nerd-fonts.overpass
+      nerd-fonts.symbols-only
     ];
   };
 }
