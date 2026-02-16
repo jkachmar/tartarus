@@ -52,7 +52,11 @@ in
       };
 
       # Install 'watchman' so 'jujutsu' can use it for filesystem monitoring.
-      home.packages = [ pkgs.watchman ];
+      # 
+      # FIXME: Weird performance regression with `watchman`.
+      # cf. https://github.com/jj-vcs/jj/issues/5826
+      # 
+      # home.packages = [ pkgs.watchman ];
       programs.jujutsu = {
         enable = true;
         # XXX: cargo-nextest fails to build on macOS, skip tests until the issue
