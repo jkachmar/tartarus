@@ -19,15 +19,7 @@ in
 {
   options.profiles.devtools.enable = lib.mkEnableOption "common developer tools";
 
-  imports = [ inputs.catppuccin.homeModules.catppuccin ];
-
   config = lib.mkIf cfg.enable {
-    # Enable catppuccin themes for all programs that have options :3
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
-    };
-
     home.packages =
       with pkgs;
       [
@@ -55,9 +47,13 @@ in
         enable = true;
         package = unstable.helix;
         defaultEditor = true;
+        settings.theme = "gruvbox_light";
       };
 
-      bat.enable = true;
+      bat = {
+        enable = true;
+        config.theme = "gruvbox-light";
+      };
       btop.enable = true;
       fd.enable = true;
       git.enable = true;
