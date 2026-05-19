@@ -25,10 +25,17 @@ in
       description = "my default VCS email address (appears on commits)";
     };
 
-    signing = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "commit signing with gpg; defaults to keys associated with vcs email";
+    signing = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "commit signing with gpg; defaults to keys associated with vcs email";
+      };
+      identity = lib.mkOption {
+        type = lib.types.str;
+        default = cfg.email;
+        description = "gpg signing identity; defaults to the vcs email";
+      };
     };
   };
 
@@ -52,10 +59,10 @@ in
       };
 
       # Install 'watchman' so 'jujutsu' can use it for filesystem monitoring.
-      # 
+      #
       # FIXME: Weird performance regression with `watchman`.
       # cf. https://github.com/jj-vcs/jj/issues/5826
-      # 
+      #
       # home.packages = [ pkgs.watchman ];
       programs.jujutsu = {
         enable = true;
@@ -127,13 +134,13 @@ in
         };
       };
     })
-    (lib.mkIf (cfg.enable && cfg.signing) {
+    (lib.mkIf (cfg.enable && cfg.signing.enable) {
       programs.jujutsu.settings = {
         git.sign-on-push = true;
         signing = {
           backend = "gpg";
           behavior = "own";
-          key = cfg.email;
+          key = cfg.signing.identity;
         };
       };
     })

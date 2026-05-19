@@ -63,7 +63,7 @@ in
       direnv = {
         enable = true;
         # broken on 25.11 stable for now
-        # 
+        #
         # cf. https://github.com/NixOS/nixpkgs/issues/502464
         package = unstable.direnv;
         nix-direnv.enable = true;

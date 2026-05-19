@@ -25,7 +25,7 @@
   };
 
   # FIXME: Set up GPG agent forwarding.
-  home-manager.users.jkachmar.profiles.vcs.signing = false;
+  home-manager.users.jkachmar.profiles.vcs.signing.enable = false;
 
   # Secrets that are shared between a few services ('ddclient' & 'acme') &
   # should be defined once.
