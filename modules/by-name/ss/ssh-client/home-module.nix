@@ -20,10 +20,10 @@ in
       programs.ssh.enableDefaultConfig = false;
     })
     (lib.mkIf cfg.yubikey {
-      programs.ssh.matchBlocks."*".identityFile = "~/.ssh/yubikey.pub";
+      programs.ssh.settings."*".IdentityFile = "~/.ssh/yubikey.pub";
     })
     (lib.mkIf (cfg.enable && isDarwin) {
-      programs.ssh.matchBlocks."*".addKeysToAgent = "yes";
+      programs.ssh.settings."*".AddKeysToAgent = "yes";
     })
   ];
 }

@@ -12,6 +12,9 @@ in
     # cf. https://github.com/nix-community/disko/issues/581#issuecomment-2260602290
     extraPools = [ "titan" ];
 
+    # FIXME: Can be removed after 26.11, when this becomes the new default.
+    forceImportRoot = false;
+
     # NOTE: These disks are being specified by `vdev_id` alias so the pool
     # should be discovered/imported according to these aliases.
     pools.titan.devNodes = "/dev/disk/by-vdev";

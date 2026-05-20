@@ -45,7 +45,7 @@
   networking.firewall.allowedUDPPorts = [ 5353 ];
   services.resolved = {
     enable = true;
-    fallbackDns = [
+    settings.Resolve.FallbackDNS = [
       "9.9.9.9"
       "8.8.8.8"
     ];
