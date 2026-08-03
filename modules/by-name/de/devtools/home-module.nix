@@ -43,6 +43,14 @@ in
         '';
       };
 
+      man = {
+        enable = lib.mkDefault true;
+        generateCaches = lib.mkDefault true;
+        man-db.enable = lib.mkDefault true;
+        mandoc.enable = lib.mkDefault false;
+        package = lib.mkDefault pkgs.man-db;
+      };
+
       helix = {
         enable = true;
         package = unstable.helix;
