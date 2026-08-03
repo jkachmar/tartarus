@@ -12,7 +12,10 @@
   ];
 
   networking.hostName = "prometheus";
-  home-manager.users.jkachmar.profiles.vcs.email = "j@mercury.com";
+  home-manager.users.jkachmar.profiles.vcs = {
+    email = "j@mercury.com";
+    signing.identity = "0x7E629E6409B70BBA";
+  };
 
   nix.linux-builder = {
     enable = true;

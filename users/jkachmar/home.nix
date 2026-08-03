@@ -31,5 +31,11 @@ lib.mkMerge [
       enable = true;
       client.enable = true;
     };
+
+    # 'pkgs.ghostty' doesn't build on macOS so we need to source terminfo from
+    # the app bundle
+    launchd.agents.emacs.config.EnvironmentVariables = {
+      TERMINFO_DIRS = "/Applications/Ghostty.app/Contents/Resources/terminfo:";
+    };
   })
 ]

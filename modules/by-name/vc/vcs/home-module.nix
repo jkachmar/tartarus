@@ -86,7 +86,7 @@ in
 
           # FIXME: NixOS & nix-darwin both set '$PAGER' to 'less -R'.
           ui = {
-            pager = "less \-FRX";
+            pager = "less -FRX";
             show-cryptographic-signatures = true;
           };
 
