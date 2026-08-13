@@ -33,9 +33,9 @@ in
       #
       # e.g. `mas search 1Password`
       masApps = lib.mkIf cfg.apps.personal {
-        "Slack" = 803453959;
-        "Strongbox Pro" = 1481853033;
-        "Wireguard" = 1451685025;
+        # "Slack" = 803453959;
+        # "Strongbox Pro" = 1481853033;
+        # "Wireguard" = 1451685025;
       };
     };
   };
