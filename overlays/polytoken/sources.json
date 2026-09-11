@@ -1,25 +1,7 @@
 {
-  "latest": "0.8.2",
+  "latest": "0.8.7",
   "stable": "0.7.4",
   "versions": {
-    "0.8.2": {
-      "x86_64-linux": {
-        "platform": "linux-amd64",
-        "hash": "sha256-ijFrq4/HyFOwiOeMDgyu6RMi9/1TYD3Ly5VBm5lQCn8="
-      },
-      "aarch64-linux": {
-        "platform": "linux-arm64",
-        "hash": "sha256-1m1JELQpplWEFKWcIR0A1jTWj52pc8d1ncqaMw7dtA8="
-      },
-      "x86_64-darwin": {
-        "platform": "macos-amd64",
-        "hash": "sha256-ecKvI+XF8MLJwEvC0uPJa8qpwySnCWK0P5boCsUzfbo="
-      },
-      "aarch64-darwin": {
-        "platform": "macos-arm64",
-        "hash": "sha256-ejVRAQgqSxOMumNBq0SD8yReh/fDts80swkClltC5OQ="
-      }
-    },
     "0.7.4": {
       "x86_64-linux": {
         "platform": "linux-amd64",
@@ -36,6 +18,24 @@
       "aarch64-darwin": {
         "platform": "macos-arm64",
         "hash": "sha256-UGz2XVdfy8Qtmj3fXzbzLY1QE+rN/obQLrgDsZcPY9s="
+      }
+    },
+    "0.8.7": {
+      "x86_64-linux": {
+        "platform": "linux-amd64",
+        "hash": "sha256-MF52Yl+6s73RjQraW1CJnd8RAtlB+O4O2q8gj7hp6Lk="
+      },
+      "aarch64-linux": {
+        "platform": "linux-arm64",
+        "hash": "sha256-+0QTF7htG1CL6RD3G4FBVTkOlllMPMDrjq7AxqR6fl0="
+      },
+      "x86_64-darwin": {
+        "platform": "macos-amd64",
+        "hash": "sha256-/5ZqNGtPuXdD7JrspaJCKa5Zi3hZKhYWgWQwohiNAcM="
+      },
+      "aarch64-darwin": {
+        "platform": "macos-arm64",
+        "hash": "sha256-q6P3jegBGz5sOQ2z4z/FRpFDGv3afhobGpvWyOn+a/I="
       }
     }
   }
