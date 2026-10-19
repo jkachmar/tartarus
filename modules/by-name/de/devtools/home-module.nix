@@ -25,7 +25,6 @@ in
       [
         curl
         rsync
-        polytoken
         wget
       ]
       ++ lib.optionals isDarwin [
