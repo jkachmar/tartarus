@@ -22,7 +22,6 @@ in
         ++ lib.optionals cfg.apps.personal [
           "calibre" # digital library
           "discord" # nerd chat
-          "element" # nerdier chat
           "signal" # secret chat
           "zotero" # nerdier digital library
         ];
