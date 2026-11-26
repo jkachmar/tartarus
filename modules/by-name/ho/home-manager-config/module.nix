@@ -1,13 +1,13 @@
 {
   inputs,
   lib,
+  self,
   unstable,
   ...
 }:
 {
   home-manager = {
-    extraSpecialArgs = { inherit inputs unstable; };
+    extraSpecialArgs = { inherit inputs self unstable; };
     useGlobalPkgs = lib.mkDefault true;
-    useUserPackages = lib.mkDefault true;
   };
 }

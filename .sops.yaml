@@ -1,16 +1,19 @@
 # NOTE: use 'sops updatekeys --yes secrets/infra.yaml' to add/remove recipients.
 keys:
   - &jkachmar "0107655CC20AFD1A8F3F9872C1782440640BC696"
+  - &jkachmar_age "age1yubikey1q2xsxjd8jh2ylrd7g2qemshxq5huhesuxaw77w2q4mckm48qplx8wlglmhg"
+  - &jkachmar_moros "age1dtakfk9vrd0ppqr0upp6vz25evhrudxrjeu042te0kxfn9nu7amq09uamd"
   - &chronos "age1v5unwn54mcxm2yd540wvdkqrm84a62yrj3tkq294whygpjl2gu6st83exg"
 creation_rules:
+  - path_regex: hosts/moros/secrets\.yaml$
+    key_groups:
+      - pgp: [*jkachmar]
+        age: [*jkachmar_age, *jkachmar_moros]
   - path_regex: (hosts/chronos|overlays/plex-plexpass)/secrets.yaml$
     key_groups:
-      - pgp:
-          - *jkachmar
-        age:
-          - *chronos
+      - pgp: [*jkachmar]
+        age: [*chronos]
   - path_regex: hosts/.*/secrets.yaml$
     key_groups:
-      - pgp:
-          - *jkachmar
+      - pgp: [*jkachmar]
         age:

@@ -23,6 +23,7 @@ in
     home.packages =
       with pkgs;
       [
+        age-plugin-yubikey
         curl
         rsync
         wget

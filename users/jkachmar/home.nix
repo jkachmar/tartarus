@@ -10,6 +10,7 @@ lib.mkMerge [
 
     fonts.installDefaultFonts = lib.mkDefault true;
     programs.gpg.enable = lib.mkDefault true;
+    xdg.enable = true;
 
     profiles = {
       devtools.enable = true;

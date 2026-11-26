@@ -1,8 +1,13 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  unstable,
+  ...
+}:
 
 {
   nix = {
-    package = pkgs.lixPackageSets.latest.lix;
+    package = unstable.lixPackageSets.lix_2_96.lix;
     settings = {
       experimental-features = [
         "flakes"
