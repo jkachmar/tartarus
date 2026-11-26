@@ -136,7 +136,7 @@ in
     })
     (lib.mkIf (cfg.enable && cfg.signing.enable) {
       programs.jujutsu.settings = {
-        git.sign-on-push = true;
+        revsets.git-sign-on-push = "~signed() & mine()";
         signing = {
           backend = "gpg";
           behavior = "own";
